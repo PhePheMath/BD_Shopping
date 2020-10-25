@@ -1,3 +1,7 @@
+--  AS FUNÇÕES AQUI APRESENTADAS NÃO SÃO VÁLIDAS, AS MESMAS 
+--  FUNÇÕES ESTÃO LISTADAS EM OUTROS ARQUIVOS
+
+--===========================================================================================--
 -- REGISTRAR LOJA
 CREATE OR REPLACE FUNCTION REGISTRAR_LOJA(
 	USUARIO VARCHAR, 
