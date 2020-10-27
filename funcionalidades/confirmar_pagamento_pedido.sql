@@ -1,0 +1,43 @@
+-- CONFIMAR PAGAMENTO DE PEDIDO
+
+/*  REQUISITOS:
+    Atualiza o protocolo_pagamento da entidade pedido
+    Atualiza a data pagamento da entidade pedido
+    Atualiza a data envio da entidade pedido para a data atual (current_date)
+    Atualiza a forma pagamento da entidade pedido.
+    Atualiza o status venda da entidade pedido
+
+    VARIAVÉIS:
+    - ID_PEDIDO: ENDEREÇO DO NOVO PEDIDO
+    - PRTCL_PAGAMENTO: PROTOCOLO DE PAGAMENTO
+    - DT_PAGAMENTO : DATA DE PAGAMENTO 
+    - FRM_PAGAMENTO: FORMA DE PAGAMENTO 
+
+    CONSTANTES: 
+    -  STTS_VENDA : ESTADO DA VENDA 2
+    - DT_PAGAMENTO: DATA DO PAGAMENTO
+
+
+*/
+
+
+CREATE OR REPLACE FUNCTION CONFIMAR_PAGAMENTO_PEDIDO(
+	ID_PDD INT,
+    PRTCL_PAGAMENTO VARCHAR, 
+	DT_PAGAMENTO DATE, 
+	FRM_PAGAMENTO INT
+) RETURNS VOID AS $$ 
+DECLARE
+    CURRENT_DATE TIMESTAMP;
+    STTS_VENDA INT;
+BEGIN
+    STTS_VENDA = 2;
+    CURRENT_DATE := 'NOW';
+    UPDATE PEDIDO 
+    SET PROTOCOLO_PAGAMENTO = PRTCL_PAGAMENTO, 
+        DATA_PAGAMENTO = DT_PAGAMENTO, 
+        FORMA_DE_PAGAMENTO = FRM_PAGAMENTO,
+        DATA_ENVIO = CURRENT_DATE,
+        STATUS_VENDA = STTS_VENDA
+    WHERE ID_PEDIDO = ID_PDD;
+END $$ LANGUAGE PLPGSQL;
